@@ -13,9 +13,9 @@ library(tidyverse)
 
 #set working directory - will need to make it wherever files are downloaded
 #local used for testing
-setwd("C:/Users/sbail/OneDrive/Documents/ClimateResearch2023/R_scripts")
+setwd("C:/Users/sbail/OneDrive/Documents/ClimateResearch2023/Test_data")
 
-fileNames <- list.files(pattern= "\\.nc$")
+fileNames <- list.files(pattern= "\\.nc$", recursive = TRUE)
 
 #set up empty vectors (Excel columns) to be appended
 #global attributes and dimensions

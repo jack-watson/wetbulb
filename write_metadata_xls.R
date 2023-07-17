@@ -3,9 +3,9 @@
 #needs tidyverse, ncdf4, and xlsx libraries
 
 #inputs are list of files to iterate through and working directory in which they are found
-write_metadata_xls = function(file_names, working_dir){
-  
+write_metadata_xls = function(working_dir){
   setwd(working_dir)
+  fileNames <- list.files(pattern= "\\.nc$")
   model_name = c() #parent_source_id
   variant = c() #variant_label
   variable = c() #variable_id
