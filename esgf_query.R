@@ -282,3 +282,18 @@
                                                   as.POSIXct(paste0(x, suf), format = fmt[1L], tz = "UTC"))
                                               }][, .SD, .SDcols = c("datetime_start", "datetime_end")]
   }
+  
+  timespan_extent <- function (df) {
+    uq <- unique(df[c("source_id")])
+    uq$dt_start <- seq(as.Date("9999-01-01"), length = nrow(uq), by = "month")
+    uq$dt_end <- seq(as.Date("9999-01-01"), length = nrow(uq), by = "month")
+    
+    for (mi in 1:nrow(uq)) {
+      dt_start <- min(df$datetime_start[df$source_id == c(uq$source_id[mi])])
+      dt_end <- max(df$datetime_end[df$source_id == c(uq$source_id[mi])])
+      uq$dt_start[mi] <- dt_start
+      uq$dt_end[mi] <- dt_end
+    }
+    output <- uq
+    return(output)
+  }
