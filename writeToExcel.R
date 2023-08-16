@@ -48,7 +48,7 @@ for (fileName in fileNames){
   time_units <- append(time_units, current_time_units$value)
   num_days <- append(num_days, dim(ncvar_get(current_nc_file, "time")))
   current_variable <- ncatt_get(current_nc_file, 0, "variable_id")
-  variable <- append(variable, current_variable$value)
+  variable <- append(variable, current_variable$valume)
   current_gridding <- ncatt_get(current_nc_file, 0, "grid")
   gridding <- append(gridding, current_gridding$value)
   
@@ -56,6 +56,7 @@ for (fileName in fileNames){
   if (current_fileSize > 0){
     downloaded_successfully <- append(downloaded_successfully, "Y")
   }
+  #maybe we could add a conditional for if ncopen fails? to add to list of unsuccessful downloads
   else{
     append(downloaded_successfully, "N")
     append(unsuccessful_downloads, fileName)
