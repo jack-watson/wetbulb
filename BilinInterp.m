@@ -12,7 +12,8 @@ function [] = BilinInterp(ncdf4_orig, data_path, var_id)
     %can loop through all dimensions and assign to lat, lon, or time etc
     %need to change these to use ncinfo function as opposed to ncreadatt
     %need to append data_path to all
-    interpolated_file = append(ncdf4_orig,"_interpolated_withbounds.nc");
+    interpolated_file_name_stem = erase(ncdf4_orig,".nc");
+    interpolated_file = append(interpolated_file_name_stem,"_interpolated_withbounds.nc");
 
     lat_info = ncinfo(append(data_path,ncdf4_orig),"lat");
     lon_info = ncinfo(append(data_path,ncdf4_orig), "lon");
@@ -92,12 +93,10 @@ function [] = BilinInterp(ncdf4_orig, data_path, var_id)
     nccreate(interpolated_file,"lon","Dimensions",{"lon",size(new_lon,2)});
     nccreate(interpolated_file,"lat_bnds","Dimensions",{"bnds",2,"lat",size(new_lat,2)});
     nccreate(interpolated_file,"lon_bnds","Dimensions",{"bnds",2,"lon",size(new_lon,2)});
+    %check order of lon and lat here
     nccreate(interpolated_file,var_name,"Dimensions",{"lon",size(new_lon,2),"lat",size(new_lat,2),"time",size(data_time,2)});
     ncdisp(interpolated_file)
 
-
-    %dimensions are not in the same order across models :( will need to
-    %address this
     
     %ncwrite(interpolated_file,"lat_bnds",data_lat_bnds,[1 1]);
     %ncwrite(interpolated_file,"lon_bnds",data_lon_bnds,[1 1]);
