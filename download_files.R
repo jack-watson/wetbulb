@@ -57,9 +57,9 @@ create_fileset_destinations = function(fileset_db, dest_path = getwd()) {
   paths = paste(dest_path,
                 "data",
                 fileset_db$variable_id,
-                fileset_db$source_id,
+                #fileset_db$source_id,
                 fileset_db$experiment_id,
-                fileset_db$member_id,
+                #fileset_db$member_id,
                 basename(fileset_db$file_url),
                 sep = "/")
   downloaded = "FALSE"
